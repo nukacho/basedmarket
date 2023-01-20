@@ -233,6 +233,11 @@ footer .copyright {
   object-fit: contain;
 }
 
+.error {
+  color: red;
+  text-decoration: underline;
+}
+
 /* --- product/[id].js --- */
 
 /* --- product/done.js --- */

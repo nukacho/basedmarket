@@ -9,13 +9,15 @@ export default function product() {
     const [id, setId] = useState('')
     const [display, setDisplay] = useState()
     const [product, setProduct] = useState([])
-    const [form, setForm] = useState(true)
+    const [form, setForm] = useState(false)
 
     const [name, setName] = useState('')
     const [number, setNumber] = useState('')
     const [instagram, setInstagram] = useState('')
     const [address, setAddress] = useState('')
     const [comment, setComment] = useState('')
+
+    const [error, setError] = useState('')
 
     useEffect(() => {
         if(router.query.id) {
@@ -43,17 +45,20 @@ export default function product() {
 
     function addOrder(e) {
       e.preventDefault()
-      addDoc(collection(database, 'orders'), {
-        name,
-        number,
-        instagram,
-        address,
-        comment,
-        product: product.product,
-        price: product.price,
-        date: serverTimestamp()
-      })
-        .then(() => router.reload())
+      if(number || instagram) {
+        addDoc(collection(database, 'orders'), {
+          name,
+          number,
+          instagram,
+          address,
+          comment,
+          product: product.product,
+          price: product.price,
+          date: serverTimestamp()
+        })
+          .then(() => router.push('/product/done'))
+      }
+      else setError('მიუთითეთ ინსტაგრამი ან ნომერი')
     }
 
     return (<>{display &&
@@ -84,7 +89,7 @@ export default function product() {
             </div>
             <div className="input-group mb-3">
               <span className="input-group-text">👤</span>
-              <input value={name} onChange={(e) => setName(e.target.value)}
+              <input required value={name} onChange={(e) => setName(e.target.value)}
                 type="text" className="form-control" placeholder="სახელი"/>
             </div>
             <div className="input-group mb-3">
@@ -98,7 +103,7 @@ export default function product() {
                 type="text" className="form-control" placeholder="ინსტაგრამი"/>
             </div>
             <div className="input-group mb-3">
-              <input value={address} onChange={(e) => setAddress(e.target.value)}
+              <input required value={address} onChange={(e) => setAddress(e.target.value)}
                 type="text" className="form-control" placeholder="მისამართი"/>
               <span className="input-group-text">🏠</span>
             </div>
@@ -107,6 +112,7 @@ export default function product() {
               <input value={comment} onChange={(e) => setComment(e.target.value)}
                 type="text" className="form-control" placeholder="დამატებითი კომენტარი"/>
             </div>
+            <p className="error">{error}</p>
             <button type={"submit"} className="button btn btn-outline-dark">შეკვეთა</button>
           </div>
         </form>
