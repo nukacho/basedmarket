@@ -1,6 +1,6 @@
-import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore"
+import { addDoc, collection, doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore"
 import { useRouter } from "next/router"
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { database } from "../../firebaseConfig"
 
 export default function product() {
@@ -9,10 +9,11 @@ export default function product() {
     const [id, setId] = useState('')
     const [display, setDisplay] = useState()
     const [product, setProduct] = useState([])
-    const [form, setForm] = useState(false)
+    const [form, setForm] = useState(true)
 
     const [name, setName] = useState('')
     const [number, setNumber] = useState('')
+    const [instagram, setInstagram] = useState('')
     const [address, setAddress] = useState('')
     const [comment, setComment] = useState('')
 
@@ -45,10 +46,12 @@ export default function product() {
       addDoc(collection(database, 'orders'), {
         name,
         number,
+        instagram,
         address,
         comment,
         product: product.product,
         price: product.price,
+        date: serverTimestamp()
       })
         .then(() => router.reload())
     }
@@ -90,14 +93,19 @@ export default function product() {
               <span className="input-group-text">📞</span>
             </div>
             <div className="input-group mb-3">
-              <span className="input-group-text">🏠</span>
-              <input value={address} onChange={(e) => setAddress(e.target.value)}
-                type="text" className="form-control" placeholder="მისამართი"/>
+              <img src="/instagram_2.png" className="insta input-group-text"/>
+              <input value={instagram} onChange={(e) => setInstagram(e.target.value)}
+                type="text" className="form-control" placeholder="ინსტაგრამი"/>
             </div>
             <div className="input-group mb-3">
+              <input value={address} onChange={(e) => setAddress(e.target.value)}
+                type="text" className="form-control" placeholder="მისამართი"/>
+              <span className="input-group-text">🏠</span>
+            </div>
+            <div className="input-group mb-3">
+              <span className="input-group-text">✎</span>
               <input value={comment} onChange={(e) => setComment(e.target.value)}
                 type="text" className="form-control" placeholder="დამატებითი კომენტარი"/>
-              <span className="input-group-text">✎</span>
             </div>
             <button type={"submit"} className="button btn btn-outline-dark">შეკვეთა</button>
           </div>

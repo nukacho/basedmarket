@@ -229,4 +229,28 @@ footer .copyright {
   height: 250px;
 }
 
+.insta {
+  object-fit: contain;
+}
+
 /* --- product/[id].js --- */
+
+/* --- product/done.js --- */
+
+.done {
+  text-align: center;
+  width: 450px;
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.done img {
+  width: 100%;
+}
+
+.done a {
+  width: 300px;
+  max-width: 90%;
+}
+
+/* --- product/done.js --- */
