@@ -27,7 +27,7 @@ export default function Upload() {
 
     return (<>
     <div style={{width: '400px'}}>
-      <div class="input-group mb-3 d-block">
+      <div className="input-group mb-3 d-block">
         <input style={{width: '100%'}} placeholder="name" className="form-control" value={name} onChange={(e) => setName(e.target.value)}/>
         <input style={{width: '100%'}} placeholder="details" className="form-control" value={details} onChange={(e) => setDetails(e.target.value)}/>
         <input style={{width: '100%'}} placeholder="image" className="form-control" value={image} onChange={(e) => setImage(e.target.value)}/>
