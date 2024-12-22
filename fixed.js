@@ -14,7 +14,7 @@ export default function Fixed({children}) {
       {display && 
         <>
         <Head>
-          <title>Based Market</title>
+          <title>QERSUMA</title>
           <link rel="icon" href="/logo.png"/>
         </Head>
         <div id="thediv">
@@ -22,11 +22,10 @@ export default function Fixed({children}) {
         </div>
         <footer>
           <div className="social">
-            <a href="https://www.instagram.com/marketisbased/" target={"_blank"}><img src="/instagram.png"/></a>
-            <a href="https://www.facebook.com/profile.php?id=100089590171747" target={"_blank"}><img src="/facebook.png"/></a>
+            <a href="https://www.instagram.com/qersuma/" target={"_blank"}><img src="/instagram.png"/></a>
             <a href="/search"><img src="/search.png"/></a>
           </div>
-          <p className="copyright">Based Market 2023 ©</p>
+          <p className="copyright">QERSUMA 2024 ©</p>
         </footer>
         </>}
     </>)
